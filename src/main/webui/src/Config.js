@@ -1,3 +1,5 @@
+export const DEV_MODE = import.meta.env.DEV;
+
 export const SHOW_TOP = 5;
 export const TAP_POWER = 10;
 export const ENABLE_BLOWING = false;
