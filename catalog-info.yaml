@@ -1,0 +1,26 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: dod-race-app-dev
+  description: DoD Race App
+  annotations:
+    argocd/app-name: dod-race-app-dev
+    argocd/app-namespace: argocd
+    argocd/instance-name: kind-local
+    backstage.io/kubernetes-id: dod-race-app
+    backstage.io/kubernetes-namespace: dod-race
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: fmenesesg/dod-race-app
+  tags:
+    - java
+    - quarkus
+    - maven
+    - dod-race
+  links:
+    - url: https://github.com/fmenesesg/dod-race-app
+      title: Source repository
+      icon: github
+spec:
+  type: service
+  lifecycle: production
+  owner: user:default/fmenesesg

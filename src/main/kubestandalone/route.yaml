@@ -1,0 +1,24 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: dod-race-app
+    app.kubernetes.io/component: dod-race-app
+    app.kubernetes.io/instance: dod-race-app
+    app.kubernetes.io/name: dod-race-app
+    app.kubernetes.io/part-of: dod-race-app
+    app.openshift.io/runtime-version: 1.0.0
+  name: dod-race-app
+spec:
+  port:
+    targetPort: 8080-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: dod-race-app
+    weight: 100
+  wildcardPolicy: None

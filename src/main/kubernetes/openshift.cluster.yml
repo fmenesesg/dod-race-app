@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: dod-race-app
+  annotations:
+    kubernetes.io/tls-acme: "true"
+spec:
+  to:
+    kind: Service
+    name: dod-race-app
+    weight: 100
+  port:
+    targetPort: 8080
+
