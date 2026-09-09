@@ -4,19 +4,6 @@ import { RACE_MAP_IMAGE, TEAMS_CONFIG } from '../../Config';
 
 const TRACK_WIDTH = 1024;
 const TRACK_HEIGHT = 682;
-const RACER_SIZE = 70;
-
-/**
- * Outer-loop centerline on dod-race-map.jpg (1024×682).
- * 0% = FINISH arch; progress runs counter-clockwise on the asphalt:
- * FINISH → Helm → CI/CD → Linux → Kubernetes → DevOps → Observability → FINISH.
- * (Git / Containers / Cloud Native are infield — not on the road.)
- */
-const TRACK_PATH_LANE_1 =
-  'M 911.0 393.0 L 927.0 340.0 L 910.0 282.0 L 885.0 225.0 L 831.0 170.0 L 763.0 126.0 L 680.0 99.0 L 578.0 82.0 L 454.0 76.0 L 323.0 82.0 L 233.0 116.0 L 176.0 128.0 L 117.0 206.0 L 96.0 237.0 L 88.0 298.0 L 97.0 367.0 L 114.0 424.0 L 153.0 494.0 L 191.0 522.0 L 235.0 565.0 L 301.0 594.0 L 380.0 615.0 L 472.0 627.0 L 556.0 614.0 L 659.0 604.0 L 729.0 595.0 L 795.0 565.0 L 840.0 524.0 L 864.0 473.0 L 907.0 429.0 L 911.0 393.0';
-
-const TRACK_PATH_LANE_2 =
-  'M 922.5 396.5 L 938.5 336.6 L 921.0 277.2 L 893.6 216.6 L 837.5 159.9 L 766.7 114.6 L 682.0 87.2 L 578.6 70.0 L 453.5 64.0 L 318.8 70.8 L 230.5 104.3 L 166.4 120.8 L 107.1 199.3 L 84.1 235.4 L 76.1 299.6 L 85.5 370.4 L 103.5 429.8 L 145.9 503.7 L 182.6 530.6 L 230.2 576.0 L 297.9 605.6 L 378.4 626.9 L 473.8 638.9 L 557.2 625.9 L 660.5 615.9 L 734.0 605.9 L 803.1 573.9 L 850.9 529.1 L 872.6 481.4 L 918.9 430.3 L 922.9 394.3';
 
 const RaceDiv = styled.div`
   text-align: center;
@@ -35,20 +22,19 @@ const RaceDiv = styled.div`
 
   .car {
     transition: offset-distance 2000ms linear;
+    image-rendering: pixelated;
   }
 
   #car1 {
-    offset-path: path('${TRACK_PATH_LANE_1}');
+    offset-path: path('M 981.8 319.9 Q 988.4 447.6 988.4 553.0 Q 915.9 678.1 738.0 618.8 Q 645.8 460.8 553.5 474.0 Q 461.3 460.8 408.5 553.0 Q 316.3 671.5 237.2 592.5 L 105.4 355.5 Q 92.3 263.3 158.1 197.5 L 355.8 118.5 Q 408.5 92.2 461.3 118.5 L 540.3 144.8 Q 619.4 144.8 672.1 105.3 L 751.2 52.7 Q 790.7 26.3 843.4 26.3 Q 883.0 39.5 922.5 65.8 Q 948.9 105.3 948.9 144.8 Q 975.2 237.0 988.4 421.3');
     offset-distance: ${(props) => `${props.distance1}%`};
-    offset-rotate: auto;
-    transform-origin: 35px 35px;
+    transform-origin: 35px 60px;
   }
 
   #car2 {
-    offset-path: path('${TRACK_PATH_LANE_2}');
+    offset-path: path('M 948.9 302.8 Q 968.6 441.1 948.9 566.1 Q 883.0 645.1 751.2 579.3 Q 665.5 441.1 553.5 434.5 Q 434.9 434.5 382.2 539.8 Q 316.3 645.1 250.4 546.4 L 138.4 342.3 Q 118.6 256.7 197.7 210.7 L 369.0 144.8 Q 408.5 118.5 461.3 144.8 L 553.5 171.2 Q 632.6 171.2 698.5 131.7 L 777.6 79.0 Q 803.9 52.7 843.4 52.7 Q 909.3 105.3 929.1 151.4 Q 948.9 237.0 948.9 421.3');
     offset-distance: ${(props) => `${props.distance2}%`};
-    offset-rotate: auto;
-    transform-origin: 35px 35px;
+    transform-origin: 35px 60px;
   }
 `;
 
@@ -73,22 +59,10 @@ function RaceTrackSvg(props) {
       />
 
       <g className="car" id="car1">
-        <image
-          xlinkHref={`${TEAMS_CONFIG[0].car}.png`}
-          width={RACER_SIZE}
-          height={RACER_SIZE}
-          x={-RACER_SIZE / 2}
-          y={-RACER_SIZE / 2}
-        />
+        <image xlinkHref={`${TEAMS_CONFIG[0].car}.png`} />
       </g>
       <g className="car" id="car2">
-        <image
-          xlinkHref={`${TEAMS_CONFIG[1].car}.png`}
-          width={RACER_SIZE}
-          height={RACER_SIZE}
-          x={-RACER_SIZE / 2}
-          y={-RACER_SIZE / 2}
-        />
+        <image xlinkHref={`${TEAMS_CONFIG[1].car}.png`} />
       </g>
     </svg>
   );
