@@ -7,15 +7,16 @@ const TRACK_HEIGHT = 682;
 const RACER_SIZE = 70;
 
 /**
- * Centerlines on dod-race-map.jpg (1024×682), snapped to the asphalt loop.
- * 0% = FINISH arch (right); progress follows the road clockwise:
- * FINISH → Observability → DevOps → Kubernetes → Linux → CI/CD → Helm → FINISH.
+ * Outer-loop centerline on dod-race-map.jpg (1024×682).
+ * 0% = FINISH arch; progress runs counter-clockwise on the asphalt:
+ * FINISH → Helm → CI/CD → Linux → Kubernetes → DevOps → Observability → FINISH.
+ * (Git / Containers / Cloud Native are infield — not on the road.)
  */
 const TRACK_PATH_LANE_1 =
-  'M 911.0 393.0 L 925.0 435.0 L 919.0 485.0 L 890.0 545.0 L 829.0 598.0 L 732.0 626.0 L 618.0 627.0 L 498.0 623.0 L 393.0 570.0 L 278.0 537.0 L 195.0 485.0 L 129.0 420.0 L 88.0 345.0 L 107.0 261.0 L 146.0 201.0 L 210.0 128.0 L 346.0 109.0 L 501.0 83.0 L 661.0 75.0 L 790.0 95.0 L 885.0 141.0 L 910.0 215.0 L 911.0 393.0';
+  'M 911.0 393.0 L 927.0 340.0 L 910.0 282.0 L 885.0 225.0 L 831.0 170.0 L 763.0 126.0 L 680.0 99.0 L 578.0 82.0 L 454.0 76.0 L 323.0 82.0 L 233.0 116.0 L 176.0 128.0 L 117.0 206.0 L 96.0 237.0 L 88.0 298.0 L 97.0 367.0 L 114.0 424.0 L 153.0 494.0 L 191.0 522.0 L 235.0 565.0 L 301.0 594.0 L 380.0 615.0 L 472.0 627.0 L 556.0 614.0 L 659.0 604.0 L 729.0 595.0 L 795.0 565.0 L 840.0 524.0 L 864.0 473.0 L 907.0 429.0 L 911.0 393.0';
 
 const TRACK_PATH_LANE_2 =
-  'M 899.6 396.8 L 913.1 433.6 L 908.2 479.8 L 882.1 535.9 L 825.7 586.5 L 731.9 614.0 L 618.4 615.0 L 503.4 612.3 L 396.3 558.5 L 284.4 526.8 L 203.4 476.5 L 139.5 414.2 L 99.7 347.6 L 117.1 267.5 L 155.0 208.9 L 211.7 139.9 L 348.0 120.8 L 501.6 95.0 L 659.2 86.9 L 784.8 105.8 L 873.6 144.8 L 898.0 215.1 L 899.0 393.1';
+  'M 922.5 396.5 L 938.5 336.6 L 921.0 277.2 L 893.6 216.6 L 837.5 159.9 L 766.7 114.6 L 682.0 87.2 L 578.6 70.0 L 453.5 64.0 L 318.8 70.8 L 230.5 104.3 L 166.4 120.8 L 107.1 199.3 L 84.1 235.4 L 76.1 299.6 L 85.5 370.4 L 103.5 429.8 L 145.9 503.7 L 182.6 530.6 L 230.2 576.0 L 297.9 605.6 L 378.4 626.9 L 473.8 638.9 L 557.2 625.9 L 660.5 615.9 L 734.0 605.9 L 803.1 573.9 L 850.9 529.1 L 872.6 481.4 L 918.9 430.3 L 922.9 394.3';
 
 const RaceDiv = styled.div`
   text-align: center;
@@ -34,7 +35,6 @@ const RaceDiv = styled.div`
 
   .car {
     transition: offset-distance 2000ms linear;
-    image-rendering: auto;
   }
 
   #car1 {
