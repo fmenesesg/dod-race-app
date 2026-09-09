@@ -1,46 +1,36 @@
-# DevOpsDays Santiago — Carrera Espacial
+# Carrera Espacial — DevOpsDays Santiago 2026
 
-Demo Quarkus + Quinoa: Carrera Espacial en equipo. Los jugadores se unen desde el móvil, generan energía y el dashboard muestra la carrera en vivo.
+Demo de cadena de suministro de software con Quarkus, Kafka, Infinispan y despliegue GitOps en OpenShift.
 
-## El juego
+## URLs de la demo
 
-Antes de arrancar, los jugadores eligen equipo y esperan la partida.
+- **Jugadores:** https://dod-race-app-dod-race.apps.cluster-zvcvg.dyn.redhatworkshops.io/
+- **Dashboard:** https://dod-race-app-dod-race.apps.cluster-zvcvg.dyn.redhatworkshops.io/dashboard (`developer` / `dodrace2026`)
 
-![Elige tu equipo](choose-team.png)
+## Flujo del juego
 
-![Esperando partida](waiting-for-game.png)
+![Elige equipo](choose-team.png)
 
-El operador usa el dashboard para iniciar la carrera.
+Los jugadores eligen tripulación y esperan en la sala. El operador inicia la partida desde el dashboard.
 
-![Inicio de carrera](race-start.jpg)
+![Dashboard](race-start.jpg)
 
-Durante la carrera, ambos equipos generan energía y las naves avanzan por el circuito orbital.
+Durante la carrera, la energía de los taps se publica en Kafka y el tablero actualiza las posiciones en tiempo real.
 
-![Carrera en curso](race.jpg)
+![Carrera](race.jpg)
 
-En el móvil, los jugadores tocan el badge para enviar energía.
+## Stack
 
-![Generar energía](player-power.png)
+- **Frontend:** Quinoa + React (jugador y dashboard)
+- **Backend:** Quarkus 3.x
+- **Mensajería:** Kafka (`power`, `game-events`)
+- **Estado:** Infinispan
+- **Deploy:** Helm + Argo CD → OpenShift
 
-Al final, el dashboard muestra el equipo ganador y la clasificación.
-
-![Fin de carrera](race-end.jpg)
-
-### Dashboard (login)
-
-La pantalla `/dashboard` está protegida. Credenciales por defecto: `developer` / `dodrace2026`.
-
-![Login](login.png)
-
-## Correr en modo dev
+## Desarrollo
 
 ```bash
 ./mvnw quarkus:dev
 ```
 
-- Jugadores: http://localhost:8080/
-- Dashboard: http://localhost:8080/dashboard
-
-## Personalizar
-
-Ver `src/main/webui/src/Config.js` para equipos, potencia y sensores.
+Ver [README.md](../README.md) para personalización y scripts de carga.
