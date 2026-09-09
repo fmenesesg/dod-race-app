@@ -4,16 +4,18 @@ import { RACE_MAP_IMAGE, TEAMS_CONFIG } from '../../Config';
 
 const TRACK_WIDTH = 1024;
 const TRACK_HEIGHT = 682;
+const RACER_SIZE = 70;
+const RACER_ANCHOR = RACER_SIZE / 2;
 
 /**
- * Open centerlines on dod-race-map.jpg (1024×682): start near Kubernetes (bottom-left)
- * → finish arch on the right.
+ * Centerlines on dod-race-map.jpg (1024×682).
+ * Path starts at the FINISH arch (right) and follows the circuit counter-clockwise.
  */
 const TRACK_PATH_LANE_1 =
-  'M 205 592 Q 108 508 90 385 Q 104 262 245 198 Q 405 106 575 84 Q 750 78 910 190 Q 974 296 956 408 Q 942 438 928 452';
+  'M 928 418 Q 868 260 780 155 Q 560 52 300 95 Q 95 145 88 310 Q 120 395 255 365 Q 470 345 560 360 Q 710 335 770 455 Q 835 565 735 615 Q 520 655 245 615 Q 115 520 145 430 Q 260 360 520 375 Q 760 365 928 418';
 
 const TRACK_PATH_LANE_2 =
-  'M 225 572 Q 128 488 110 365 Q 124 242 265 178 Q 425 86 595 64 Q 770 58 930 170 Q 994 276 976 388 Q 962 418 948 432';
+  'M 948 438 Q 888 280 800 175 Q 580 72 320 115 Q 115 165 108 330 Q 140 415 275 385 Q 490 365 580 380 Q 730 355 790 475 Q 855 585 755 635 Q 540 675 265 635 Q 135 540 165 450 Q 280 380 540 395 Q 780 385 948 438';
 
 const RaceDiv = styled.div`
   text-align: center;
@@ -32,21 +34,23 @@ const RaceDiv = styled.div`
 
   .car {
     transition: offset-distance 2000ms linear;
-    
+    offset-anchor: ${RACER_ANCHOR}px ${RACER_ANCHOR}px;
   }
 
   #car1 {
     offset-path: path('${TRACK_PATH_LANE_1}');
-    offset-distance: ${props => `${props.distance1}%`};
+    offset-distance: ${(props) => `${props.distance1}%`};
     offset-rotate: auto;
-    transform-origin: 35px 35px;
   }
 
   #car2 {
     offset-path: path('${TRACK_PATH_LANE_2}');
-    offset-distance: ${props => `${props.distance2}%`};
+    offset-distance: ${(props) => `${props.distance2}%`};
     offset-rotate: auto;
-    transform-origin: 35px 35px;
+  }
+
+  .racer {
+    transform: translate(${-RACER_ANCHOR}px, ${-RACER_ANCHOR}px);
   }
 `;
 
@@ -71,10 +75,20 @@ function RaceTrackSvg(props) {
       />
 
       <g className="car" id="car1">
-        <image xlinkHref={`${TEAMS_CONFIG[0].car}.png`} width="70" height="70" />
+        <image
+          className="racer"
+          xlinkHref={`${TEAMS_CONFIG[0].car}.png`}
+          width={RACER_SIZE}
+          height={RACER_SIZE}
+        />
       </g>
       <g className="car" id="car2">
-        <image xlinkHref={`${TEAMS_CONFIG[1].car}.png`} width="70" height="70" />
+        <image
+          className="racer"
+          xlinkHref={`${TEAMS_CONFIG[1].car}.png`}
+          width={RACER_SIZE}
+          height={RACER_SIZE}
+        />
       </g>
     </svg>
   );
